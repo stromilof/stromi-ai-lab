@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;
+  --surface:#13131a;
+  --surface2:#1c1c27;
+  --border:#2a2a3d;
+  --accent:#7c6af7;
+  --accent2:#4ecdc4;
+  --text:#f0f0f8;
+  --muted:#8888a8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
+
+.noise{position:fixed;inset:0;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.glow{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,106,247,0.12) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.glow2{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(78,205,196,0.08) 0%,transparent 70%);bottom:0;left:-100px;pointer-events:none}
+
+nav{padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);z-index:100}
+.logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--text)}
+.logo span{color:var(--accent);font-style:italic}
+nav a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:400;transition:color .2s}
+nav a:hover{color:var(--text)}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-cta{background:var(--accent);color:#fff;padding:.4rem 1rem;border-radius:20px;font-size:.8rem;font-weight:500}
+
+hero{display:block;padding:5rem 2rem 4rem;max-width:900px;margin:0 auto;text-align:center}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:block}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:1.5rem}
+h1 em{color:var(--accent);font-style:italic}
+.subtitle{color:var(--muted);font-size:1.05rem;font-weight:300;max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;border:none;cursor:pointer}
+.btn-primary:hover{background:#6a58e5;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:400;border:1px solid var(--border);transition:all .2s;cursor:pointer}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+.section{padding:4rem 2rem;max-width:1100px;margin:0 auto}
+.section-label{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:3rem;display:flex;align-items:center;gap:.75rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--surface2)}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,106,247,.05),transparent);opacity:0;transition:opacity .3s}
+.card:hover::before{opacity:1}
+
+.card-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .7rem;border-radius:20px;margin-bottom:1rem}
+.tag-ai{background:rgba(124,106,247,.15);color:var(--accent)}
+.tag-tool{background:rgba(78,205,196,.15);color:var(--accent2)}
+.tag-app{background:rgba(255,183,77,.15);color:#ffb74d}
+
+.card-icon{width:44px;height:44px;border-radius:12px;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:var(--surface2)}
+.card h3{font-size:1.05rem;font-weight:500;margin-bottom:.5rem}
+.card p{color:var(--muted);font-size:.85rem;line-height:1.6;font-weight:300}
+.card-footer{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.card-footer a{font-size:.8rem;color:var(--accent);text-decoration:none;font-weight:500}
+.stack{display:flex;gap:.4rem;flex-wrap:wrap}
+.chip{font-size:.65rem;padding:.2rem .5rem;border-radius:4px;background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.about-text h2{font-family:'DM Serif Display',serif;font-size:2rem;margin-bottom:1rem;line-height:1.2}
+.about-text p{color:var(--muted);font-size:.95rem;line-height:1.7;font-weight:300;margin-bottom:.75rem}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.stat-n{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--accent)}
+.stat-l{font-size:.8rem;color:var(--muted);margin-top:.25rem}
+
+.contact{text-align:center;padding:5rem 2rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:2rem 0}
+.contact h2{font-family:'DM Serif Display',serif;font-size:2.5rem;margin-bottom:.75rem}
+.contact p{color:var(--muted);margin-bottom:2rem;font-weight:300}
+.social-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.social-link{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.25rem;border:1px solid var(--border);border-radius:8px;color:var(--muted);text-decoration:none;font-size:.85rem;transition:all .2s}
+.social-link:hover{border-color:var(--accent);color:var(--text)}
+
+footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;font-family:'DM Mono',monospace}
+
+@media(max-width:640px){
+  .about-grid{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="glow"></div>
+<div class="glow2"></div>
+
+<nav>
+  <div class="logo">your<span>AI</span>.lab</div>
+  <div class="nav-links">
+    <a href="#">Projects</a>
+    <a href="#">About</a>
+    <a href="#" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<hero>
+  <span class="eyebrow">AI side projects portfolio</span>
+  <h1>Building with <em>AI</em>,<br>one experiment at a time</h1>
+  <p class="subtitle">A collection of AI-powered tools, apps, and experiments — built with Google AI Studio, Lovable, Claude, and more.</p>
+  <div class="hero-btns">
+    <button class="btn-primary">View projects</button>
+    <button class="btn-ghost">About me</button>
+  </div>
+</hero>
+
+<div class="section">
+  <div class="section-label">Featured projects</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <span class="card-tag tag-ai">AI tool</span>
+      <h3>Smart Email Responder</h3>
+      <p>Drafts professional replies using context from your inbox. Built with Gemini Pro and Google AI Studio.</p>
+      <div class="card-footer">
+        <div class="stack">
+          <span class="chip">Gemini</span><span class="chip">AI Studio</span>
+        </div>
+        <a href="#">View demo →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎨</div>
+      <span class="card-tag tag-app">App</span>
+      <h3>Brand Kit Generator</h3>
+      <p>Generates logos, color palettes, and copy for startups in seconds. No design skills needed.</p>
+      <div class="card-footer">
+        <div class="stack">
+          <span class="chip">Lovable</span><span class="chip">OpenAI</span>
+        </div>
+        <a href="#">Live app →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <span class="card-tag tag-tool">Tool</span>
+      <h3>CSV Analyst</h3>
+      <p>Upload any spreadsheet, ask questions in plain language, and get instant charts and insights.</p>
+      <div class="card-footer">
+        <div class="stack">
+          <span class="chip">Claude</span><span class="chip">React</span>
+        </div>
+        <a href="#">Try it →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🗣️</div>
+      <span class="card-tag tag-ai">AI tool</span>
+      <h3>Interview Coach</h3>
+      <p>Simulates job interviews for any role and gives detailed feedback on your answers in real time.</p>
+      <div class="card-footer">
+        <div class="stack">
+          <span class="chip">Gemini</span><span class="chip">AI Studio</span>
+        </div>
+        <a href="#">View demo →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📝</div>
+      <span class="card-tag tag-app">App</span>
+      <h3>Meeting Summarizer</h3>
+      <p>Paste any transcript and get structured summaries with action items, decisions, and follow-ups.</p>
+      <div class="card-footer">
+        <div class="stack">
+          <span class="chip">Lovable</span><span class="chip">Claude</span>
+        </div>
+        <a href="#">Live app →</a>
+      </div>
+    </div>
+    <div class="card" style="border-style:dashed;cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:200px">
+      <div style="font-size:2rem;margin-bottom:.75rem;opacity:.4">+</div>
+      <h3 style="color:var(--muted);font-weight:400">More coming soon</h3>
+      <p style="font-size:.8rem">New experiments drop regularly</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Curious builder,<br>not waiting for perfect</h2>
+      <p>I build AI-powered tools in my spare time — not to ship a startup, but because the technology is genuinely exciting and I learn best by making things.</p>
+      <p>Most of these projects start as "what if I could..." and end up being actually useful. Some get deployed, some stay as demos. All of them taught me something.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">12+</div><div class="stat-l">Projects built</div></div>
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">AI platforms used</div></div>
+      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Rabbit holes explored</div></div>
+      <div class="stat"><div class="stat-n">0€</div><div class="stat-l">Hosting cost</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="contact">
+  <h2>Let's connect</h2>
+  <p>I'm always up to talk AI, side projects, or weird experiments.</p>
+  <div class="social-links">
+    <a href="#" class="social-link">GitHub</a>
+    <a href="#" class="social-link">LinkedIn</a>
+    <a href="#" class="social-link">Twitter / X</a>
+    <a href="#" class="social-link">Email me</a>
+  </div>
+</div>
+
+<footer>built with curiosity · hosted free on github pages</footer>
+
+</body>
+</html>
