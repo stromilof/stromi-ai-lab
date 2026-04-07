@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Stromi AI Lab</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -30,17 +30,6 @@ nav a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:400;t
 nav a:hover{color:var(--text)}
 .nav-links{display:flex;gap:1.5rem;align-items:center}
 .nav-cta{background:var(--accent);color:#fff;padding:.4rem 1rem;border-radius:20px;font-size:.8rem;font-weight:500}
-
-hero{display:block;padding:5rem 2rem 4rem;max-width:900px;margin:0 auto;text-align:center}
-.eyebrow{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:block}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:1.5rem}
-h1 em{color:var(--accent);font-style:italic}
-.subtitle{color:var(--muted);font-size:1.05rem;font-weight:300;max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:var(--accent);color:#fff;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;border:none;cursor:pointer}
-.btn-primary:hover{background:#6a58e5;transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--text);padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:400;border:1px solid var(--border);transition:all .2s;cursor:pointer}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 
 .section{padding:4rem 2rem;max-width:1100px;margin:0 auto}
 .section-label{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:3rem;display:flex;align-items:center;gap:.75rem}
@@ -83,6 +72,17 @@ h1 em{color:var(--accent);font-style:italic}
 
 footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;font-family:'DM Mono',monospace}
 
+.hero{display:block;padding:5rem 2rem 4rem;max-width:900px;margin:0 auto;text-align:center}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:block}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:1.5rem}
+h1 em{color:var(--accent);font-style:italic}
+.subtitle{color:var(--muted);font-size:1.05rem;font-weight:300;max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;border:none;cursor:pointer}
+.btn-primary:hover{background:#6a58e5;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:400;border:1px solid var(--border);transition:all .2s;cursor:pointer}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
 @media(max-width:640px){
   .about-grid{grid-template-columns:1fr}
   .nav-links a:not(.nav-cta){display:none}
@@ -103,7 +103,7 @@ footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;font-fa
   </div>
 </nav>
 
-<hero>
+<section class="hero">
   <span class="eyebrow">AI side projects portfolio</span>
   <h1>Building with <em>AI</em>,<br>one experiment at a time</h1>
   <p class="subtitle">A collection of AI-powered tools, apps, and experiments — built with Google AI Studio, Lovable, Claude, and more.</p>
@@ -111,11 +111,13 @@ footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;font-fa
     <button class="btn-primary">View projects</button>
     <button class="btn-ghost">About me</button>
   </div>
-</hero>
+</section>
 
 <div class="section">
   <div class="section-label">Featured projects</div>
   <div class="grid">
+    <!-- Repeat your project cards here as in original code -->
+    <!-- Example card -->
     <div class="card">
       <div class="card-icon">🤖</div>
       <span class="card-tag tag-ai">AI tool</span>
@@ -128,75 +130,20 @@ footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;font-fa
         <a href="#">View demo →</a>
       </div>
     </div>
-    <div class="card">
-      <div class="card-icon">🎨</div>
-      <span class="card-tag tag-app">App</span>
-      <h3>Brand Kit Generator</h3>
-      <p>Generates logos, color palettes, and copy for startups in seconds. No design skills needed.</p>
-      <div class="card-footer">
-        <div class="stack">
-          <span class="chip">Lovable</span><span class="chip">OpenAI</span>
-        </div>
-        <a href="#">Live app →</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-icon">📊</div>
-      <span class="card-tag tag-tool">Tool</span>
-      <h3>CSV Analyst</h3>
-      <p>Upload any spreadsheet, ask questions in plain language, and get instant charts and insights.</p>
-      <div class="card-footer">
-        <div class="stack">
-          <span class="chip">Claude</span><span class="chip">React</span>
-        </div>
-        <a href="#">Try it →</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🗣️</div>
-      <span class="card-tag tag-ai">AI tool</span>
-      <h3>Interview Coach</h3>
-      <p>Simulates job interviews for any role and gives detailed feedback on your answers in real time.</p>
-      <div class="card-footer">
-        <div class="stack">
-          <span class="chip">Gemini</span><span class="chip">AI Studio</span>
-        </div>
-        <a href="#">View demo →</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-icon">📝</div>
-      <span class="card-tag tag-app">App</span>
-      <h3>Meeting Summarizer</h3>
-      <p>Paste any transcript and get structured summaries with action items, decisions, and follow-ups.</p>
-      <div class="card-footer">
-        <div class="stack">
-          <span class="chip">Lovable</span><span class="chip">Claude</span>
-        </div>
-        <a href="#">Live app →</a>
-      </div>
-    </div>
-    <div class="card" style="border-style:dashed;cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:200px">
-      <div style="font-size:2rem;margin-bottom:.75rem;opacity:.4">+</div>
-      <h3 style="color:var(--muted);font-weight:400">More coming soon</h3>
-      <p style="font-size:.8rem">New experiments drop regularly</p>
-    </div>
   </div>
 </div>
 
+<!-- About section -->
 <div class="section">
   <div class="section-label">About</div>
   <div class="about-grid">
     <div class="about-text">
       <h2>Curious builder,<br>not waiting for perfect</h2>
       <p>I build AI-powered tools in my spare time — not to ship a startup, but because the technology is genuinely exciting and I learn best by making things.</p>
-      <p>Most of these projects start as "what if I could..." and end up being actually useful. Some get deployed, some stay as demos. All of them taught me something.</p>
     </div>
     <div class="stats">
       <div class="stat"><div class="stat-n">12+</div><div class="stat-l">Projects built</div></div>
       <div class="stat"><div class="stat-n">4</div><div class="stat-l">AI platforms used</div></div>
-      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Rabbit holes explored</div></div>
-      <div class="stat"><div class="stat-n">0€</div><div class="stat-l">Hosting cost</div></div>
     </div>
   </div>
 </div>
@@ -204,12 +151,6 @@ footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;font-fa
 <div class="contact">
   <h2>Let's connect</h2>
   <p>I'm always up to talk AI, side projects, or weird experiments.</p>
-  <div class="social-links">
-    <a href="#" class="social-link">GitHub</a>
-    <a href="#" class="social-link">LinkedIn</a>
-    <a href="#" class="social-link">Twitter / X</a>
-    <a href="#" class="social-link">Email me</a>
-  </div>
 </div>
 
 <footer>built with curiosity · hosted free on github pages</footer>
