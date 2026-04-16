@@ -2,158 +2,367 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Stromi AI Lab</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stromi Lof — Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0a0a0f;
-  --surface:#13131a;
-  --surface2:#1c1c27;
-  --border:#2a2a3d;
-  --accent:#7c6af7;
-  --accent2:#4ecdc4;
-  --text:#f0f0f8;
-  --muted:#8888a8;
-}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
-
-.noise{position:fixed;inset:0;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-
-.glow{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,106,247,0.12) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
-.glow2{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(78,205,196,0.08) 0%,transparent 70%);bottom:0;left:-100px;pointer-events:none}
-
-nav{padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);z-index:100}
-.logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--text)}
-.logo span{color:var(--accent);font-style:italic}
-nav a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:400;transition:color .2s}
-nav a:hover{color:var(--text)}
-.nav-links{display:flex;gap:1.5rem;align-items:center}
-.nav-cta{background:var(--accent);color:#fff;padding:.4rem 1rem;border-radius:20px;font-size:.8rem;font-weight:500}
-
-.section{padding:4rem 2rem;max-width:1100px;margin:0 auto}
-.section-label{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:3rem;display:flex;align-items:center;gap:.75rem}
-.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
-
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
-.card:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--surface2)}
-.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,106,247,.05),transparent);opacity:0;transition:opacity .3s}
-.card:hover::before{opacity:1}
-
-.card-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .7rem;border-radius:20px;margin-bottom:1rem}
-.tag-ai{background:rgba(124,106,247,.15);color:var(--accent)}
-.tag-tool{background:rgba(78,205,196,.15);color:var(--accent2)}
-.tag-app{background:rgba(255,183,77,.15);color:#ffb74d}
-
-.card-icon{width:44px;height:44px;border-radius:12px;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:var(--surface2)}
-.card h3{font-size:1.05rem;font-weight:500;margin-bottom:.5rem}
-.card p{color:var(--muted);font-size:.85rem;line-height:1.6;font-weight:300}
-.card-footer{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.card-footer a{font-size:.8rem;color:var(--accent);text-decoration:none;font-weight:500}
-.stack{display:flex;gap:.4rem;flex-wrap:wrap}
-.chip{font-size:.65rem;padding:.2rem .5rem;border-radius:4px;background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace}
-
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
-.about-text h2{font-family:'DM Serif Display',serif;font-size:2rem;margin-bottom:1rem;line-height:1.2}
-.about-text p{color:var(--muted);font-size:.95rem;line-height:1.7;font-weight:300;margin-bottom:.75rem}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
-.stat-n{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--accent)}
-.stat-l{font-size:.8rem;color:var(--muted);margin-top:.25rem}
-
-.contact{text-align:center;padding:5rem 2rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:2rem 0}
-.contact h2{font-family:'DM Serif Display',serif;font-size:2.5rem;margin-bottom:.75rem}
-.contact p{color:var(--muted);margin-bottom:2rem;font-weight:300}
-.social-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.social-link{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.25rem;border:1px solid var(--border);border-radius:8px;color:var(--muted);text-decoration:none;font-size:.85rem;transition:all .2s}
-.social-link:hover{border-color:var(--accent);color:var(--text)}
-
-footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;font-family:'DM Mono',monospace}
-
-.hero{display:block;padding:5rem 2rem 4rem;max-width:900px;margin:0 auto;text-align:center}
-.eyebrow{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:block}
-h1{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:1.5rem}
-h1 em{color:var(--accent);font-style:italic}
-.subtitle{color:var(--muted);font-size:1.05rem;font-weight:300;max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:var(--accent);color:#fff;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;border:none;cursor:pointer}
-.btn-primary:hover{background:#6a58e5;transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--text);padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:400;border:1px solid var(--border);transition:all .2s;cursor:pointer}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-@media(max-width:640px){
-  .about-grid{grid-template-columns:1fr}
-  .nav-links a:not(.nav-cta){display:none}
-}
+:root{--bg:#f7f5f0;--ink:#0f0e0c;--ink2:#4a4740;--ink3:#9a9690;--surface:#ffffff;--surface2:#efede8;--border:#dddad4;--accent:#c8501a;--accent2:#1a6bc8;--green:#1a7a4a}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(247,245,240,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:400;color:var(--ink);text-decoration:none;letter-spacing:-0.01em}
+.nav-logo em{color:var(--accent);font-style:italic}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:.8rem;color:var(--ink2);text-decoration:none;font-weight:400;letter-spacing:.05em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{font-size:.75rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.5rem 1.25rem;border-radius:2px;background:var(--ink);color:var(--bg);text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--accent);color:#fff}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 2.5rem 5rem;position:relative;border-bottom:1px solid var(--border)}
+.hero-label{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--ink3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:1rem}
+.hero-label::before{content:'';width:2rem;height:1px;background:var(--ink3)}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:1.0;letter-spacing:-0.03em;max-width:900px;margin-bottom:3rem}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero h1 span{color:var(--ink3)}
+.hero-sub{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.hero-tagline{font-size:1rem;color:var(--ink2);font-weight:300;max-width:420px;line-height:1.7}
+.hero-tagline strong{color:var(--ink);font-weight:500}
+.hero-actions{display:flex;gap:1rem;flex-shrink:0}
+.btn{font-size:.8rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:.75rem 1.75rem;border-radius:2px;text-decoration:none;transition:all .2s;display:inline-block;border:1px solid transparent}
+.btn-dark{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn-dark:hover{background:var(--accent);border-color:var(--accent)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--border)}
+.btn-outline:hover{border-color:var(--ink)}
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.75rem 0;background:var(--surface2)}
+.marquee-track{display:flex;gap:3rem;white-space:nowrap;animation:marquee 30s linear infinite}
+.marquee-track span{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;flex-shrink:0}
+.marquee-track .dot{color:var(--accent)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.section{padding:6rem 2.5rem;max-width:1200px;margin:0 auto}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);gap:2rem;flex-wrap:wrap}
+.section-num{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--ink3);letter-spacing:.1em}
+.section-title{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:300;letter-spacing:-0.02em;color:var(--ink)}
+.section-desc{font-size:.85rem;color:var(--ink3);max-width:280px;text-align:right;line-height:1.6}
+.projects{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.project-card{background:var(--surface);display:grid;grid-template-columns:1fr 2fr 1fr;transition:background .2s}
+.project-card:hover{background:#fdfcfa}
+.project-left{padding:2.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between}
+.project-num{font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--ink3);letter-spacing:.1em;margin-bottom:auto}
+.project-tags{display:flex;flex-direction:column;gap:.5rem;margin-top:2rem}
+.tag{display:inline-block;font-family:'Geist Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border-radius:2px;width:fit-content}
+.tag-ai{background:#fff3ee;color:var(--accent)}
+.tag-live{background:#eefff5;color:var(--green)}
+.tag-tool{background:#eef4ff;color:var(--accent2)}
+.tag-product{background:#f5f5f5;color:var(--ink2)}
+.project-main{padding:2.5rem;border-right:1px solid var(--border)}
+.project-name{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:400;letter-spacing:-0.02em;margin-bottom:.35rem;line-height:1.1}
+.project-sub{font-size:.75rem;color:var(--ink3);font-family:'Geist Mono',monospace;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.5rem}
+.project-img{margin-bottom:1.5rem;border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+.project-img img{width:100%;display:block;max-height:260px;object-fit:cover;object-position:top}
+.project-story{font-size:.9rem;color:var(--ink2);line-height:1.75;font-weight:300;margin-bottom:1.5rem}
+.project-story strong{color:var(--ink);font-weight:500}
+.project-desc{font-size:.85rem;color:var(--ink2);line-height:1.7;font-weight:300}
+.project-highlight{margin-top:1.5rem;padding:1rem 1.25rem;background:var(--surface2);border-left:2px solid var(--accent);font-size:.82rem;color:var(--ink2);line-height:1.6;font-style:italic}
+.project-right{padding:2.5rem;display:flex;flex-direction:column;justify-content:space-between}
+.project-meta{display:flex;flex-direction:column;gap:1rem}
+.meta-label{font-family:'Geist Mono',monospace;font-size:.6rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem}
+.meta-value{font-size:.82rem;color:var(--ink);font-weight:400}
+.project-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);text-decoration:none;padding:.6rem 0;border-bottom:1px solid var(--accent);transition:all .2s;width:fit-content;margin-top:auto}
+.project-link:hover{gap:.75rem}
+.project-link-na{font-size:.75rem;color:var(--ink3);font-family:'Geist Mono',monospace;font-style:italic;margin-top:auto}
+.results{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+.result-item{display:flex;align-items:center;gap:1rem}
+.result-bar-wrap{flex:1;height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.result-bar{height:100%;background:var(--accent);border-radius:2px}
+.result-label{font-size:.75rem;color:var(--ink2);min-width:160px}
+.result-pct{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--accent);min-width:40px;text-align:right}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;padding:6rem 2.5rem;max-width:1200px;margin:0 auto;border-top:1px solid var(--border)}
+.about-left h2{font-family:'Fraunces',serif;font-size:3rem;font-weight:300;letter-spacing:-0.03em;line-height:1.1;margin-bottom:2rem}
+.about-left h2 em{color:var(--accent);font-style:italic}
+.about-left p{font-size:.9rem;color:var(--ink2);line-height:1.8;font-weight:300;margin-bottom:1rem}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:2rem}
+.stat-box{background:var(--surface);padding:1.5rem}
+.stat-n{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:300;color:var(--ink);line-height:1}
+.stat-l{font-size:.75rem;color:var(--ink3);margin-top:.35rem;font-family:'Geist Mono',monospace;letter-spacing:.05em;text-transform:uppercase}
+.tools-label{font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.tools-list{display:flex;flex-wrap:wrap;gap:.5rem}
+.tool-chip{font-size:.7rem;padding:.3rem .75rem;border-radius:2px;border:1px solid var(--border);color:var(--ink2);font-family:'Geist Mono',monospace}
+.contact{padding:6rem 2.5rem;text-align:center;border-top:1px solid var(--border)}
+.contact h2{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:300;letter-spacing:-0.03em;margin-bottom:1rem}
+.contact h2 em{color:var(--accent);font-style:italic}
+.contact p{font-size:.9rem;color:var(--ink2);margin-bottom:3rem;font-weight:300}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.contact-link{font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:.75rem 1.75rem;border:1px solid var(--border);border-radius:2px;color:var(--ink);text-decoration:none;transition:all .2s}
+.contact-link:hover{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+footer{padding:2rem 2.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer span{font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--ink3);letter-spacing:.08em}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.project-card{grid-template-columns:1fr}.project-left{border-right:none;border-bottom:1px solid var(--border)}.project-main{border-right:none;border-bottom:1px solid var(--border)}.about-wrap{grid-template-columns:1fr;gap:3rem}.nav-links a:not(.nav-cta){display:none}.hero{padding:7rem 1.25rem 3rem}}
 </style>
 </head>
 <body>
-<div class="noise"></div>
-<div class="glow"></div>
-<div class="glow2"></div>
-
 <nav>
-  <div class="logo">your<span>AI</span>.lab</div>
+  <a href="#" class="nav-logo">Stromi <em>Lof</em></a>
   <div class="nav-links">
-    <a href="#">Projects</a>
-    <a href="#">About</a>
-    <a href="#" class="nav-cta">Contact</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-cta">Get in touch</a>
   </div>
 </nav>
 
 <section class="hero">
-  <span class="eyebrow">AI side projects portfolio</span>
-  <h1>Building with <em>AI</em>,<br>one experiment at a time</h1>
-  <p class="subtitle">A collection of AI-powered tools, apps, and experiments — built with Google AI Studio, Lovable, Claude, and more.</p>
-  <div class="hero-btns">
-    <button class="btn-primary">View projects</button>
-    <button class="btn-ghost">About me</button>
+  <div class="hero-label">Portfolio — 2025</div>
+  <h1>Curious <em>builder</em> at the intersection of product & growth</h1>
+  <div class="hero-sub">
+    <p class="hero-tagline">I find problems then build the tools to fix them. From pricing audits to kids' learning apps, each project starts with a real frustration.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-dark">View projects</a>
+      <a href="#about" class="btn btn-outline">About me</a>
+    </div>
   </div>
 </section>
 
-<div class="section">
-  <div class="section-label">Featured projects</div>
-  <div class="grid">
-    <!-- Repeat your project cards here as in original code -->
-    <!-- Example card -->
-    <div class="card">
-      <div class="card-icon">🤖</div>
-      <span class="card-tag tag-ai">AI tool</span>
-      <h3>Smart Email Responder</h3>
-      <p>Drafts professional replies using context from your inbox. Built with Gemini Pro and Google AI Studio.</p>
-      <div class="card-footer">
-        <div class="stack">
-          <span class="chip">Gemini</span><span class="chip">AI Studio</span>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>AI Product</span><span class="dot">·</span><span>Growth</span><span class="dot">·</span><span>Google AI Studio</span><span class="dot">·</span><span>Lovable</span><span class="dot">·</span><span>Gemini</span><span class="dot">·</span><span>React</span><span class="dot">·</span><span>GitHub Pages</span><span class="dot">·</span><span>SaaS</span><span class="dot">·</span><span>Fintech</span><span class="dot">·</span><span>Ship it</span><span class="dot">·</span><span>AI Product</span><span class="dot">·</span><span>Growth</span><span class="dot">·</span><span>Google AI Studio</span><span class="dot">·</span><span>Lovable</span><span class="dot">·</span><span>Gemini</span><span class="dot">·</span><span>React</span><span class="dot">·</span><span>GitHub Pages</span><span class="dot">·</span><span>SaaS</span><span class="dot">·</span><span>Fintech</span><span class="dot">·</span><span>Ship it</span>
+  </div>
+</div>
+
+<div id="projects">
+  <div class="section">
+    <div class="section-header fade-up">
+      <div><div class="section-num">01 —</div><div class="section-title">Projects</div></div>
+      <p class="section-desc">Five tools built from real frustrations. Each one solves a problem I lived personally.</p>
+    </div>
+    <div class="projects">
+      <div class="project-card fade-up">
+        <div class="project-left">
+          <div class="project-num">01</div>
+          <div class="project-tags">
+            <span class="tag tag-ai">AI Tool</span>
+            <span class="tag tag-ai">SaaS</span>
+          </div>
         </div>
-        <a href="#">View demo →</a>
+        <div class="project-main">
+          <div class="project-name">Pricing Prophet</div>
+          <div class="project-sub">AI pricing auditor for SaaS & B2B</div>
+          <div class="project-img"><img src="https://github.com/user-attachments/assets/be9939d2-452b-4611-9a81-6c18894b1a19" alt="Pricing Prophet screenshot"></div>
+          <p class="project-story">Sam Altman tweeted that pricing was hard. Then I noticed every SaaS founder saying the same thing — including myself, working on a fintech pricing page. So I built the tool I wished existed.</p>
+          <p class="project-desc">Paste any pricing page URL and get a structured revenue audit: conversion leaks, packaging weaknesses, value metric analysis, and a 3-step action plan.</p>
+          
+          
+        </div>
+        <div class="project-right">
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Built with</div>
+              <div class="meta-value">Google AI Studio · Gemini</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">For</div>
+              <div class="meta-value">SaaS founders, B2B monetisation teams</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Status</div>
+              <div class="meta-value">Demo available</div>
+            </div>
+          </div>
+          <a href="https://pricing-prophet-1024788305551.us-west1.run.app" target="_blank" class="project-link">View project →</a>
+        </div>
       </div>
-    </div>
+      <div class="project-card fade-up">
+        <div class="project-left">
+          <div class="project-num">02</div>
+          <div class="project-tags">
+            <span class="tag tag-live">Live App</span>
+            <span class="tag tag-ai">AI Tool</span>
+          </div>
+        </div>
+        <div class="project-main">
+          <div class="project-name">BoKay AI</div>
+          <div class="project-sub">AI Property listing optimizer</div>
+          <div class="project-img"><img src="https://github.com/user-attachments/assets/7837c3c1-f868-4f9f-b101-58abf5c2e93c" alt="BoKay AI screenshot"></div>
+          <p class="project-story">"Bo kay" means home in Martinican Creole. Because a good listing doesn't just describe a property — it makes someone feel like they're already home.</p>
+          <p class="project-desc">Some property listings are notoriously poor — too short, missing key details, no structure. BoKay AI takes your raw property details (rooms, size, energy rating, photos) and generates a compelling enhanced description that actually sells. </p>
+          <div class="project-highlight">Next: URL import — paste your Idealista listing directly, no manual entry needed.</div>
+          
+        </div>
+        <div class="project-right">
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Built with</div>
+              <div class="meta-value">Lovable · AI</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">For</div>
+              <div class="meta-value">Real Estate marketplaces, Property owners</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Status</div>
+              <div class="meta-value">Live</div>
+            </div>
+          </div>
+          <a href="https://bo-kay-ai.lovable.app" target="_blank" class="project-link">View live app →</a>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-left">
+          <div class="project-num">03</div>
+          <div class="project-tags">
+            <span class="tag tag-product">Prototype</span>
+            <span class="tag tag-tool">Tool</span>
+          </div>
+        </div>
+        <div class="project-main">
+          <div class="project-name">Pricing Source of Truth</div>
+          <div class="project-sub">Single source of truth for pricing across markets and languages</div>
+          <div class="project-img"><img src="https://github.com/user-attachments/assets/ade9ccf6-5fa6-4d84-b288-1f4024e4d2b0" alt="Pricing Source of Truth screenshot"></div>
+          <p class="project-story">Managing pricing tables across multiple markets means multiple documents (Google Sheets, Notion pages), multiple owners, and inevitable inconsistencies. </p>
+          <p class="project-desc">One source of truth for all pricing data, with per-market eligibility rules, locale management, and auto-translation via Gemini. Any team — product, marketing, legal — works from the same table. Built as a prototype for stakeholders at my current company.</p>
+          <div class="project-highlight">Presented to stakeholders as a solution to a problem everyone knew existed but nobody had solved.</div>
+          
+        </div>
+        <div class="project-right">
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Built with</div>
+              <div class="meta-value">Google AI Studio · Gemini · React</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">For</div>
+              <div class="meta-value">Fintech · Internal tool</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Status</div>
+              <div class="meta-value">Prototype</div>
+            </div>
+          </div>
+          <span class="project-link-na">Coming soon →</span>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-left">
+          <div class="project-num">04</div>
+          <div class="project-tags">
+            <span class="tag tag-live">Live shipped product</span>
+            <span class="tag tag-product">Fintech</span>
+            <span class="tag tag-product">Product</span>
+          </div>
+        </div>
+        <div class="project-main">
+          <div class="project-name">Promo Hub</div>
+          <div class="project-sub">Promotion management system for marketing teams</div>
+          <div class="project-img"><img src="https://github.com/user-attachments/assets/b2145166-ce53-447a-9ee2-b5e8023948f2" alt="Promo Hub screenshot"></div>
+          <p class="project-story">Marketing teams were launching promotions in 5 days and taking them down in 2 hours of manual work. I built a system to fix both.</p>
+          <p class="project-desc">Promo Hub lets marketing create, schedule, and retire promotional modules across pages — no engineering dependency, no manual cleanup. Set a start date, set an end date, done.</p>
+          
+          
+          <div class="results">
+            <div class="result-item">
+              <span class="result-label">Launch time: 5 days → 2 days</span>
+              <div class="result-bar-wrap"><div class="result-bar" style="width:60%"></div></div>
+              <span class="result-pct">−60%</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Takedown time: 2h → 30 min</span>
+              <div class="result-bar-wrap"><div class="result-bar" style="width:75%"></div></div>
+              <span class="result-pct">−75%</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-right">
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Built with</div>
+              <div class="meta-value">Internal · Fintech</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">For</div>
+              <div class="meta-value">Marketing teams</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Status</div>
+              <div class="meta-value">Live shipped product</div>
+            </div>
+          </div>
+          <span class="project-link-na">Coming soon →</span>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-left">
+          <div class="project-num">05</div>
+          <div class="project-tags">
+            <span class="tag tag-tool">EdTech</span>
+            <span class="tag tag-live">Live App</span>
+          </div>
+        </div>
+        <div class="project-main">
+          <div class="project-name">Multiplication Master</div>
+          <div class="project-sub">Multiplication practice that feels like play</div>
+          <div class="project-img"><img src="https://github.com/user-attachments/assets/d58a9ff2-fb2e-4015-9ae2-c98501656eb7" alt="Multiplication Master screenshot"></div>
+          <p class="project-story">My son was learning multiplication and I noticed that passive memorization without practice doesn't stick — so I built something that makes the practice feel like play.</p>
+          <p class="project-desc">Two modes: Learn and Play. The learning grid lets kids hover to see multiplication as area — rows, columns, and rectangles lighting up to make the concept visual. The play mode offers three games: Flashcards for self-paced recall, Quiz Whiz with streak tracking and confetti, and Time Attack — 60 seconds, as many problems as possible.</p>
+          <div class="project-highlight">Built for my kids. Probably useful for yours too.</div>
+          
+        </div>
+        <div class="project-right">
+          <div class="project-meta">
+            <div class="meta-item">
+              <div class="meta-label">Built with</div>
+              <div class="meta-value">Google AI Studio </div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">For</div>
+              <div class="meta-value">Kids · Parents · Teachers</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Status</div>
+              <div class="meta-value">Live</div>
+            </div>
+          </div>
+          <span class="project-link-na">Coming soon →</span>
+        </div>
+      </div></div>
   </div>
 </div>
 
-<!-- About section -->
-<div class="section">
-  <div class="section-label">About</div>
-  <div class="about-grid">
-    <div class="about-text">
-      <h2>Curious builder,<br>not waiting for perfect</h2>
-      <p>I build AI-powered tools in my spare time — not to ship a startup, but because the technology is genuinely exciting and I learn best by making things.</p>
+<div id="about" class="about-wrap">
+  <div class="about-left fade-up">
+    <h2>I find the gap. Then I <em>build</em> the bridge.</h2>
+    <p>I'm a Growth PM with a background in website acquisition — but I've always been more interested in the problem than the title. Every project here started with a frustration I lived personally: bad pricing pages, broken listing tools, kids who weren't learning.</p>
+    <p>AI didn't change what I do. It changed how fast I can do it. I now build functional prototypes in days instead of months, which means I can test ideas before anyone has to trust them.</p>
+    <p>I'm looking for a role where building and product thinking are the same job.</p>
+  </div>
+  <div class="about-right fade-up">
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-n">5</div><div class="stat-l">Showcased projects </div></div>
+      <div class="stat-box"><div class="stat-n">100%</div><div class="stat-l">Curiosity</div></div>
+      <div class="stat-box"><div class="stat-n">300% </div><div class="stat-l">Fun</div></div>
+      <div class="stat-box"><div class="stat-n">0€</div><div class="stat-l">Cost</div></div>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-n">12+</div><div class="stat-l">Projects built</div></div>
-      <div class="stat"><div class="stat-n">4</div><div class="stat-l">AI platforms used</div></div>
-    </div>
+    <div class="tools-label">Tools & platforms</div>
+    <div class="tools-list"><span class="tool-chip">Google AI Studio</span><span class="tool-chip">Lovable</span><span class="tool-chip">Gemini</span><span class="tool-chip">Claude API</span><span class="tool-chip">React</span><span class="tool-chip">Supabase</span><span class="tool-chip">GitHub Pages</span></div>
   </div>
 </div>
 
-<div class="contact">
-  <h2>Let's connect</h2>
-  <p>I'm always up to talk AI, side projects, or weird experiments.</p>
+<div id="contact" class="contact">
+  <h2>Let's <em>talk</em></h2>
+  <p></p>
+  <div class="contact-links"><a href="https://www.linkedin.com/in/stromi-lof-058b3610/" target="_blank" class="contact-link">LinkedIn</a>
+    <a href="https://x.com/stromilof" target="_blank" class="contact-link">Twitter / X</a></div>
 </div>
 
-<footer>built with curiosity · hosted free on github pages</footer>
+<footer>
+  <span>Stromi Lof · 2025</span>
+  <span>Built & deployed free · GitHub Pages</span>
+</footer>
 
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
