@@ -4,22 +4,76 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stromi Lof — Builder</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f7f5f0;--ink:#0f0e0c;--ink2:#4a4740;--ink3:#9a9690;--surface:#ffffff;--surface2:#efede8;--border:#dddad4;--accent:#c8501a;--accent2:#1a6bc8;--green:#1a7a4a}
+
+:root{
+  --bg:#f7f5f0;
+  --ink:#0f0e0c;
+  --ink2:#4a4740;
+  --ink3:#9a9690;
+  --surface:#ffffff;
+  --surface2:#efede8;
+  --border:#dddad4;
+  --accent:#c8501a;
+  --accent2:#1a6bc8;
+  --green:#1a7a4a;
+}
+
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;line-height:1.6;overflow-x:hidden}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Geist',sans-serif;
+  line-height:1.6;
+}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(247,245,240,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:400;color:var(--ink);text-decoration:none;letter-spacing:-0.01em}
-.nav-logo em{color:var(--accent);font-style:italic}
-.nav-links{display:flex;gap:2rem;align-items:center}
-.nav-links a{font-size:.8rem;color:var(--ink2);text-decoration:none;font-weight:400;letter-spacing:.05em;text-transform:uppercase;transition:color .2s}
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+  padding:1.25rem 2.5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(247,245,240,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-logo{
+  font-family:'Fraunces',serif;
+  text-decoration:none;
+  color:var(--ink);
+  font-size:1.1rem;
+}
+
+.nav-logo em{color:var(--accent)}
+
+.nav-links{
+  display:flex;
+  gap:2rem;
+  align-items:center;
+}
+
+.nav-links a{
+  font-size:.8rem;
+  color:var(--ink2);
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
 .nav-links a:hover{color:var(--accent)}
 
-/* FIXED CTA */
+/* CTA FIX */
 .nav-cta{
   font-size:.75rem;
   font-weight:500;
@@ -27,12 +81,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;displ
   text-transform:uppercase;
   padding:.5rem 1.25rem;
   border-radius:2px;
-  background:#ffffff;
+  background:#fff;
   color:var(--ink);
-  text-decoration:none;
   border:1px solid var(--border);
-  transition:all .2s;
+  text-decoration:none;
 }
+
 .nav-cta:hover{
   background:var(--ink);
   color:#fff;
@@ -40,36 +94,265 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;displ
 }
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 2.5rem 5rem;border-bottom:1px solid var(--border)}
-.hero-label{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--ink3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem}
-.hero h1{font-family:'Fraunces',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:1.0;letter-spacing:-0.03em;max-width:900px;margin-bottom:3rem}
-.hero h1 em{color:var(--accent);font-style:italic}
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:8rem 2.5rem 5rem;
+}
 
-.hero-sub{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
-.hero-tagline{font-size:1rem;color:var(--ink2);font-weight:300;max-width:420px;line-height:1.7}
+.hero-label{
+  font-family:'Geist Mono',monospace;
+  font-size:.7rem;
+  color:var(--ink3);
+  margin-bottom:2rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
 
-.btn{font-size:.8rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:.75rem 1.75rem;border-radius:2px;text-decoration:none;transition:all .2s}
-.btn-dark{background:var(--ink);color:var(--bg)}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.5rem,8vw,7rem);
+  font-weight:300;
+  line-height:1;
+  margin-bottom:3rem;
+}
+
+.hero h1 em{color:var(--accent)}
+
+.hero-sub{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:2rem;
+  flex-wrap:wrap;
+}
+
+.hero-tagline{
+  max-width:420px;
+  font-size:1rem;
+  color:var(--ink2);
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* BUTTONS */
+.btn{
+  padding:.75rem 1.5rem;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:.8rem;
+  letter-spacing:.04em;
+}
+
+.btn-dark{
+  background:var(--ink);
+  color:#fff;
+}
+
 .btn-dark:hover{background:var(--accent)}
-.btn-outline{border:1px solid var(--border);color:var(--ink)}
-.btn-outline:hover{border-color:var(--ink)}
+
+.btn-outline{
+  border:1px solid var(--border);
+  color:var(--ink);
+}
+
+/* PROJECTS */
+.section{
+  padding:6rem 2.5rem;
+  max-width:1200px;
+  margin:auto;
+}
+
+.projects{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:var(--border);
+}
+
+.project-card{
+  display:grid;
+  grid-template-columns:1fr 2fr 1fr;
+  background:var(--surface);
+}
+
+.project-card:hover{background:#fdfcfa}
+
+/* LEFT */
+.project-left{
+  padding:2.5rem;
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+}
+
+.project-num{
+  font-family:'Geist Mono';
+  font-size:.65rem;
+  color:var(--ink3);
+}
+
+.project-tags{
+  margin-top:auto;
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+
+.tag{
+  font-family:'Geist Mono';
+  font-size:.6rem;
+  text-transform:uppercase;
+  padding:.25rem .6rem;
+  width:fit-content;
+}
+
+.tag-ai{background:#fff3ee;color:var(--accent)}
+.tag-live{background:#eefff5;color:var(--green)}
+.tag-tool{background:#eef4ff;color:var(--accent2)}
+.tag-product{background:#f5f5f5;color:var(--ink2)}
+
+/* MAIN */
+.project-main{
+  padding:2.5rem;
+  border-right:1px solid var(--border);
+}
+
+.project-name{
+  font-family:'Fraunces';
+  font-size:1.8rem;
+  margin-bottom:.35rem;
+}
+
+.project-sub{
+  font-family:'Geist Mono';
+  font-size:.75rem;
+  color:var(--ink3);
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+
+.project-story{
+  font-size:.9rem;
+  color:var(--ink2);
+  margin-bottom:1rem;
+}
+
+.project-desc{
+  font-size:.85rem;
+  color:var(--ink2);
+  margin-bottom:1.5rem;
+}
+
+.project-highlight{
+  padding:1rem 1.25rem;
+  background:var(--surface2);
+  border-left:2px solid var(--accent);
+  font-style:italic;
+  font-size:.82rem;
+}
+
+/* RIGHT */
+.project-right{
+  padding:2.5rem;
+  display:flex;
+  flex-direction:column;
+}
+
+.meta-label{
+  font-family:'Geist Mono';
+  font-size:.6rem;
+  color:var(--ink3);
+  text-transform:uppercase;
+  margin-bottom:.25rem;
+}
+
+.meta-value{
+  font-size:.82rem;
+  margin-bottom:1rem;
+}
+
+.project-link{
+  margin-top:auto;
+  font-size:.75rem;
+  text-transform:uppercase;
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px solid var(--accent);
+  width:fit-content;
+}
+
+.project-link-na{
+  margin-top:auto;
+  font-size:.75rem;
+  color:var(--ink3);
+  font-family:'Geist Mono';
+}
 
 /* ABOUT */
-.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:6rem;padding:6rem 2.5rem;max-width:1200px;margin:0 auto;border-top:1px solid var(--border)}
-.about-left h2{font-family:'Fraunces',serif;font-size:3rem;font-weight:300;margin-bottom:2rem}
+.about-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6rem;
+  padding:6rem 2.5rem;
+  max-width:1200px;
+  margin:auto;
+  border-top:1px solid var(--border);
+}
+
+.about-left h2{
+  font-family:'Fraunces';
+  font-size:3rem;
+  font-weight:300;
+}
+
 .about-left h2 em{color:var(--accent)}
-.about-left p{font-size:.9rem;color:var(--ink2);line-height:1.8;margin-bottom:1rem}
+
+.about-left p{
+  font-size:.9rem;
+  color:var(--ink2);
+  margin-bottom:1rem;
+}
 
 /* CONTACT */
-.contact{padding:6rem 2.5rem;text-align:center;border-top:1px solid var(--border)}
-.contact h2{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:300;margin-bottom:1rem}
+.contact{
+  padding:6rem 2.5rem;
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+
+.contact h2{
+  font-family:'Fraunces';
+  font-size:3rem;
+}
+
 .contact h2 em{color:var(--accent)}
-.contact p{font-size:.9rem;color:var(--ink2);margin-bottom:3rem}
 
-.contact-links{display:flex;gap:1rem;justify-content:center}
-.contact-link{font-size:.75rem;padding:.75rem 1.75rem;border:1px solid var(--border);text-decoration:none;color:var(--ink)}
-.contact-link:hover{background:var(--ink);color:#fff}
+.contact p{
+  font-size:.9rem;
+  color:var(--ink2);
+  margin-bottom:3rem;
+}
 
+.contact-links{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+}
+
+.contact-links a{
+  padding:.75rem 1.5rem;
+  border:1px solid var(--border);
+  text-decoration:none;
+  color:var(--ink);
+}
+
+.contact-links a:hover{
+  background:var(--ink);
+  color:#fff;
+}
 </style>
 </head>
 
@@ -77,6 +360,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;displ
 
 <nav>
   <a href="#" class="nav-logo">Stromi <em>Lof</em></a>
+
   <div class="nav-links">
     <a href="#projects">Projects</a>
     <a href="#about">About</a>
@@ -86,12 +370,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;displ
 
 <section class="hero">
   <div class="hero-label">Portfolio</div>
+
   <h1><em>Builder</em> at the intersection of product & growth</h1>
 
   <div class="hero-sub">
     <p class="hero-tagline">
       I start with problems I’ve lived, then build and ship products fast—from prototypes to real-world tools.
     </p>
+
     <div class="hero-actions">
       <a href="#projects" class="btn btn-dark">View projects</a>
       <a href="#about" class="btn btn-outline">About me</a>
@@ -99,21 +385,151 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;displ
   </div>
 </section>
 
-<div id="about" class="about-wrap">
-  <div class="about-left">
-    <h2>I find the gap. Then I <em>build</em> the bridge.</h2>
-    <p>I'm a Growth PM with a background in acquisition — but I care more about the problem than the tactic.</p>
-    <p>Every project starts with a frustration I've lived myself.</p>
-    <p>I turn that into prototypes, side projects, and live products — like Promo Hub, which cut promotion launches from 5 days to 2 and reduced manual cleanup from hours to minutes.</p>
+<!-- PROJECTS -->
+<div id="projects" class="section">
+  <div class="projects">
+
+    <!-- 01 -->
+    <div class="project-card">
+      <div class="project-left">
+        <div class="project-num">01</div>
+        <div class="project-tags">
+          <span class="tag tag-ai">AI Tool</span>
+          <span class="tag tag-ai">SaaS</span>
+        </div>
+      </div>
+
+      <div class="project-main">
+        <div class="project-name">Pricing Prophet</div>
+        <div class="project-sub">AI pricing auditor</div>
+        <p class="project-story">Founders consistently struggle with pricing clarity.</p>
+        <p class="project-desc">Audits pricing pages and surfaces revenue leaks and packaging issues.</p>
+      </div>
+
+      <div class="project-right">
+        <div class="meta-label">Built with</div>
+        <div class="meta-value">Google AI Studio · Gemini</div>
+        <span class="project-link">View project →</span>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="project-card">
+      <div class="project-left">
+        <div class="project-num">02</div>
+        <div class="project-tags">
+          <span class="tag tag-live">Live</span>
+          <span class="tag tag-ai">AI</span>
+        </div>
+      </div>
+
+      <div class="project-main">
+        <div class="project-name">BoKay AI</div>
+        <div class="project-sub">Real estate listing generator</div>
+        <p class="project-story">Good listings sell a feeling, not just facts.</p>
+        <p class="project-desc">Turns raw property data into structured, compelling listings.</p>
+      </div>
+
+      <div class="project-right">
+        <div class="meta-label">Built with</div>
+        <div class="meta-value">Lovable · AI</div>
+        <a class="project-link" href="#">View app →</a>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="project-card">
+      <div class="project-left">
+        <div class="project-num">03</div>
+        <div class="project-tags">
+          <span class="tag tag-tool">Prototype</span>
+        </div>
+      </div>
+
+      <div class="project-main">
+        <div class="project-name">Pricing Source of Truth</div>
+        <div class="project-sub">Internal pricing system</div>
+        <p class="project-story">Pricing data was fragmented across teams.</p>
+        <p class="project-desc">Centralised pricing logic across markets and languages.</p>
+      </div>
+
+      <div class="project-right">
+        <span class="project-link-na">Coming soon →</span>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="project-card">
+      <div class="project-left">
+        <div class="project-num">04</div>
+        <div class="project-tags">
+          <span class="tag tag-live">Shipped</span>
+          <span class="tag tag-product">Fintech</span>
+        </div>
+      </div>
+
+      <div class="project-main">
+        <div class="project-name">Promo Hub</div>
+        <div class="project-sub">Promotion management system</div>
+        <p class="project-story">Marketing teams were slow and manual.</p>
+        <p class="project-desc">Create, schedule, and retire promotions without engineering dependency.</p>
+
+        <div class="project-highlight">
+          Cut launch time: 5 days → 2 days. Cleanup: hours → minutes.
+        </div>
+      </div>
+
+      <div class="project-right">
+        <div class="meta-label">Impact</div>
+        <div class="meta-value">−60% launch time</div>
+        <span class="project-link-na">Live system</span>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="project-card">
+      <div class="project-left">
+        <div class="project-num">05</div>
+        <div class="project-tags">
+          <span class="tag tag-tool">EdTech</span>
+          <span class="tag tag-live">Live</span>
+        </div>
+      </div>
+
+      <div class="project-main">
+        <div class="project-name">Multiplication Master</div>
+        <div class="project-sub">Learning app for kids</div>
+        <p class="project-story">Kids learn better through interaction.</p>
+        <p class="project-desc">Gamified multiplication with visual learning modes.</p>
+      </div>
+
+      <div class="project-right">
+        <span class="project-link-na">Coming soon →</span>
+      </div>
+    </div>
+
   </div>
 </div>
 
+<!-- ABOUT -->
+<div id="about" class="about-wrap">
+  <div class="about-left">
+    <h2>I find the gap. Then I <em>build</em> the bridge.</h2>
+
+    <p>I'm a Growth PM with a background in acquisition — but I care more about the problem than the tactic.</p>
+    <p>Every project starts with a frustration I've lived myself.</p>
+    <p>I build and ship fast—from prototypes to real-world tools.</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
 <div id="contact" class="contact">
   <h2>Let’s <em>connect</em></h2>
-  <p>I connect with people and companies who see building and product thinking as inseparable. If that’s how you operate, I’d love to hear from you.</p>
+  <p>I connect with people and companies who see building and product thinking as inseparable.</p>
+
   <div class="contact-links">
-    <a href="https://www.linkedin.com" target="_blank" class="contact-link">LinkedIn</a>
-    <a href="#" class="contact-link">Twitter / X</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Twitter / X</a>
   </div>
 </div>
 
